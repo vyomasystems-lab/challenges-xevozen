@@ -7,19 +7,31 @@ import operator
 from cocotb.result import ReturnValue
 
 def bitmanip(mav_putvalue_instr, mav_putvalue_src1,mav_putvalue_src2, mav_putvalue_src3):
+    # print("mav_putvalue_instr", mav_putvalue_instr)
     instr=hex(mav_putvalue_instr)[2:]
+    # print("instr", instr)
     le=int(instr,16) #convert Hex  to int
     le=bin(le)[2:] #convert int to binary
+    # print("le", le)
     le=le.zfill(32)
+    # print("le", le)
     length=len(le)
     opcode = le[-7::]
-    func3 = le[length-15:length-12]
+    # print("opcode", opcode)
+    func3 = le[length-15:length-12] #15-17 seq starting:1
+    # print("func3", func3)
     func7 = le[length-32:length-25]
+    # print("func7", func7)
     func7_imm = le[length-32:length-27]
+    # print("func7_imm", func7_imm)
     func7_2bit = le[length-27:length-25]
+    # print("func7_2bit", func7_2bit)
     func7_1bit = le[length-28:length-27]
+    # print("func7_1bit", func7_1bit)
     func7_fsri_1bit = le[length-27:length-26]
+    # print("func7_fsri_1bit", func7_fsri_1bit)
     func7_imm_SHFL = le[length-32:length-26]
+    # print("func7_imm_SHFL", func7_imm_SHFL)
     imm_value = le[length-25:length-20]
     imm_value_1 = le[length-25:length-20]
     fsr_imm_value = le[length-26:length-20]
