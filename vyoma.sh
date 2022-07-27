@@ -10,7 +10,7 @@ export PYTHONPATH=/workspace/.pyenv_mirror/user/3.8.13/lib/python3.8/site-packag
 cp -r /workspace/.pyenv_mirror/user/3.8.13/lib/python3.8/site-packages/cocotb*  /home/gitpod/.pyenv/versions/3.8.13/lib/python3.8/site-packages/
 cp -r /workspace/.pyenv_mirror/user/3.8.13/lib/python3.8/site-packages/pygpi /home/gitpod/.pyenv/versions/3.8.13/lib/python3.8/site-packages/
 rm -rf core.*
-clear
+# clear
 echo "****** UpTickPro (Evaluation Version) 1.0.0 *******"
 echo "Copyright (c) 2022, Vyoma Systems Private Limited"
 echo "All Rights Reserved."
