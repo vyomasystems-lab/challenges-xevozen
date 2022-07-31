@@ -2,7 +2,7 @@
 -------
 The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
 
-![Verification Environment](/assets/)
+![Verification Environment](/assets/lvl3-1.png)
 
 ## Verification Environment
 
@@ -19,11 +19,11 @@ The assert statement is used for comparing the Full Subtractor's output to the e
 
 The following error is seen:
 ```
-assert (dut.D.value == (dut.A.value^dut.B.value)^dut.Bin.value) and (dut.Bout.value == (dut.Bin.value and (not(dut.A.value))) or (not(dut.A.value) and dut.B.value)) , f"FullSubtractor result is incorrect: {dut.D.value} != {(dut.A.value^dut.B.value)^dut.Bin.value} or {dut.Bout.value} != {dut.Bin.value and (~(dut.A.value)) or (~dut.A.value and dut.B.value)}"
+assert (dut.D.value == exD) and (dut.Bout.value==exBout) , f"FullSubtractor result is incorrect: {dut.D.value} != {exD} or {dut.Bout.value} != {exBout}"
 ```
 ## Test Scenario 1
-- Test Inputs: A = 1,	B = 1,	Bin = 1
-- Expected Output: D = 1, Bout = 1
+- Test Inputs: A = 1,	B = 0,	Bin = 1
+- Expected Output: D = 0, Bout = 0
 - Observed Output: D = 0, Bout = 1
 
 Output mismatches for the above inputs proving that there is a design bug
@@ -32,20 +32,24 @@ Output mismatches for the above inputs proving that there is a design bug
 Based on the above test input and analysing the design, we see the following
 
 ```
-	xor_gate u6(q, r, Bout);	====> BUG
+module and_gate(a2, b2, c2);
+input a2, b2;
+output c2;
+assign c2 = a2 | b2;	====> BUG
+endmodule
 ```
 For the multiplexer design, the logic should be 
 ```
-	or_gate u6(q, r, Bout);
+	assign c2 = a2 & b2;
 ```
 instead of 
 ```
-	xor_gate u6(q, r, Bout);
+	assign c2 = a2 | b2;
 ``` 
 as in the design code.
 
 ## Verification Strategy
-We can study the design code to identify any commonly occuring fault. We found that for Inputs: A = 1,	B = 1,	Bin = 1 wrong output is coming. If we make state transition diagram we can get the fault. We can brute force each input combination to find the combination which is having fault for complex designs.
+We can study the design code to identify any commonly occuring fault. We found that for Inputs: A = 1,	B = 0,	Bin = 1 wrong output is coming. If we make state transition diagram we can get the fault. We can brute force each input combination to find the combination which is having fault for complex designs.
 
 ## Is the verification complete ?
 Ofcourse **NO**. There can be many input combination for which output fails to produce correct output. There is no design which is 100% bug free. We can only take best action to test and prevent that. All types of test is not possible in this type of testing. There can be many hidden bugs which will only come into picture after hardware implementation and can be very tricky to reproduce and debug them.

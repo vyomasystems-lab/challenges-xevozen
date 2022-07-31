@@ -2,7 +2,7 @@
 -------
 The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
 
-![Verification Environment](/assets/)
+![Verification Environment](/assets/lvl1-2.png)
 
 ## Verification Environment
 
