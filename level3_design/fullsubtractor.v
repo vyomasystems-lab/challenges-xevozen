@@ -27,7 +27,7 @@ input a2, b2;
 
 output c2;
 
-assign c2 = a2 & b2;
+assign c2 = a2 | b2;
 
 endmodule
 
@@ -72,6 +72,6 @@ half_subtractor u4(A, B, p, q);
 
 half_subtractor u5(p, Bin, D, r);
 
-xor_gate u6(q, r, Bout);
+or_gate u6(q, r, Bout);
 
 endmodule : fullsubtractor
