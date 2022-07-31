@@ -20,6 +20,7 @@ async def test_seq_bug1(dut):
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
     await FallingEdge(dut.clk)
+    cocotb.log.info('Input Sequence: 10111011')
     dut.inp_bit.value = 1
     await FallingEdge(dut.clk)
     dut.inp_bit.value = 0
@@ -38,8 +39,9 @@ async def test_seq_bug1(dut):
     dut.inp_bit.value = 1
     await FallingEdge(dut.clk)
     cocotb.log.info(dut.seq_seen.value)
-    cocotb.log.info('#### CTB: Develop your test here! ######')
-    assert dut.seq_seen.value == 1
+    # cocotb.log.info('#### CTB: Develop your test here! ######')
+    # assert dut.seq_seen.value == 1
+    assert dut.seq_seen.value == 1, f"Seq Detector result is incorrect: {dut.seq_seen.value} != {1}"
 
 
 # Working Bug

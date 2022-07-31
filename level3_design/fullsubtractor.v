@@ -72,6 +72,6 @@ half_subtractor u4(A, B, p, q);
 
 half_subtractor u5(p, Bin, D, r);
 
-or_gate u6(q, r, Bout);
+xor_gate u6(q, r, Bout);
 
 endmodule : fullsubtractor
