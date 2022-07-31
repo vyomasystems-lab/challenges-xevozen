@@ -4,12 +4,10 @@ TOPLEVEL_LANG ?= verilog
 
 PWD=$(shell pwd)
 
-export PYTHONPATH := $(PWD):$(PYTHONPATH)  # reference model
+VERILOG_SOURCES = $(PWD)/               # provide your design path
 
-VERILOG_SOURCES = $(PWD)/fullsubtractor.v
-
-TOPLEVEL := fullsubtractor        # design
-MODULE   := test_fullsubtractor   # test
+TOPLEVEL := adder           # design file
+MODULE   := test_adder     # test file
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
 
